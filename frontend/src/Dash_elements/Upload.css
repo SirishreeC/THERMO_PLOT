@@ -1,0 +1,546 @@
+/* ============================================================
+   Upload.css — scoped under .upload-page
+   Fully responsive · Scrollable tab bar · No label overlap
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+
+/* ── Page shell ── */
+.upload-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0f172a 0%, #1a0033 50%, #0f172a 100%);
+  padding: 2.5rem 2rem 3rem;
+  color: #e2e8f0;
+  font-family: 'JetBrains Mono', monospace;
+  box-sizing: border-box;
+}
+
+/* ── Header ── */
+.upload-page .upload-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.upload-page .upload-title {
+  font-size: clamp(2.2rem, 6vw, 4.5rem);
+  font-family: 'Crimson Text', serif;
+  font-weight: 700;
+  background: linear-gradient(135deg, #f97316, #eab308);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0 0 0.75rem;
+  animation: uploadPulse 2.5s ease-in-out infinite;
+}
+
+.upload-page .upload-subtitle {
+  font-size: clamp(0.8rem, 2vw, 1.1rem);
+  font-family: 'Crimson Text', serif;
+  color: #94a3b8;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+/* ── Upload card ── */
+.upload-page .upload-card-wrapper {
+  max-width: 40rem;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.upload-page .upload-card {
+  background: linear-gradient(135deg, #1e293b, #293548);
+  padding: 3rem 2.5rem;
+  border-radius: 1.5rem;
+  border: 1px solid rgba(79,115,150,0.35);
+  box-shadow: 0 25px 60px rgba(0,0,0,0.55), 0 0 0 1px rgba(249,115,22,0.06);
+  text-align: center;
+  transition: transform 0.45s ease, box-shadow 0.45s ease;
+}
+
+.upload-page .upload-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 40px 80px rgba(249,115,22,0.18), 0 0 0 1px rgba(249,115,22,0.15);
+}
+
+.upload-page .upload-icon-box {
+  width: 5rem;
+  height: 5rem;
+  margin: 0 auto 1.75rem;
+  background: linear-gradient(135deg, #fb923c, #f97316);
+  border-radius: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.2rem;
+  box-shadow: 0 12px 30px rgba(249,115,22,0.35);
+  transition: transform 0.45s ease;
+}
+
+.upload-page .upload-card:hover .upload-icon-box {
+  transform: rotate(10deg) scale(1.08);
+}
+
+.upload-page .upload-card-title {
+  font-size: clamp(1.3rem, 3vw, 1.75rem);
+  font-family: 'Crimson Text', serif;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 1.5rem;
+}
+
+.upload-page .upload-btn {
+  display: inline-block;
+  background: linear-gradient(135deg, #f97316, #f59e0b);
+  padding: 1rem 3rem;
+  border-radius: 0.9rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  font-size: clamp(0.85rem, 2vw, 1rem);
+  color: #fff;
+  cursor: pointer;
+  border: 2px solid rgba(251,146,60,0.4);
+  box-shadow: 0 8px 28px rgba(249,115,22,0.32);
+  transition: transform 0.25s, box-shadow 0.25s;
+  letter-spacing: 0.04em;
+}
+
+.upload-page .upload-btn:hover {
+  transform: scale(1.05) translateY(-3px);
+  box-shadow: 0 18px 44px rgba(249,115,22,0.48);
+}
+
+/* ── Metadata cards ── */
+.upload-page .meta-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.upload-page .meta-card {
+  padding: 1.5rem 1rem;
+  border-radius: 1rem;
+  text-align: center;
+  border: 1px solid rgba(255,255,255,0.07);
+  transition: transform 0.25s;
+}
+
+.upload-page .meta-card:hover { transform: translateY(-3px); }
+
+.upload-page .meta-card.blue   { background: linear-gradient(135deg, #1e3a8a, #1d4ed8); }
+.upload-page .meta-card.green  { background: linear-gradient(135deg, #065f46, #059669); }
+.upload-page .meta-card.purple { background: linear-gradient(135deg, #581c87, #7c3aed); }
+
+.upload-page .meta-value {
+  font-size: clamp(1.3rem, 2.5vw, 2rem);
+  font-weight: 800;
+  font-family: 'JetBrains Mono', monospace;
+  margin-bottom: 0.4rem;
+}
+
+.upload-page .meta-label {
+  font-size: 0.72rem;
+  font-family: 'JetBrains Mono', monospace;
+  opacity: 0.8;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* ============================================================
+   TAB BAR — scrollable, no overlap, sticky on scroll
+   ============================================================ */
+.upload-page .tab-bar-wrapper {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  /* small fade so it doesn't hard-cut the background */
+  background: linear-gradient(180deg, #0f172a 80%, transparent 100%);
+  padding-bottom: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.upload-page .tab-bar {
+  display: flex;
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(24px);
+  border-radius: 1rem;
+  padding: 0.35rem;
+  border: 1px solid rgba(249,115,22,0.18);
+  gap: 0.25rem;
+  /* KEY FIX: horizontal scroll instead of wrap/overlap */
+  overflow-x: auto;
+  overflow-y: hidden;
+  flex-wrap: nowrap;
+  scrollbar-width: none;          /* Firefox */
+  -ms-overflow-style: none;       /* IE/Edge */
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4), 0 0 0 1px rgba(249,115,22,0.06);
+}
+
+/* Hide scrollbar track (Chrome/Safari) */
+.upload-page .tab-bar::-webkit-scrollbar { display: none; }
+
+/* Scroll-fade arrows hint that more tabs exist */
+.upload-page .tab-bar-wrapper::before,
+.upload-page .tab-bar-wrapper::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0.5rem;
+  width: 2.5rem;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.upload-page .tab-bar-wrapper::before {
+  left: 0;
+  background: linear-gradient(90deg, #0f172a 30%, transparent);
+  border-radius: 1rem 0 0 1rem;
+}
+
+.upload-page .tab-bar-wrapper::after {
+  right: 0;
+  background: linear-gradient(-90deg, #0f172a 30%, transparent);
+  border-radius: 0 1rem 1rem 0;
+}
+
+/* Individual tab button */
+.upload-page .tab-btn {
+  /* fixed min-width so labels never wrap or shrink */
+  flex: 0 0 auto;
+  min-width: max-content;
+  padding: 0.7rem 1.1rem;
+  border: none;
+  border-radius: 0.7rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: background 0.22s, color 0.22s, transform 0.22s, box-shadow 0.22s;
+  white-space: nowrap;
+  background: transparent;
+  color: #64748b;
+  letter-spacing: 0.03em;
+  position: relative;
+}
+
+.upload-page .tab-btn:hover {
+  color: #fb923c;
+  background: rgba(249,115,22,0.10);
+  transform: translateY(-1px);
+}
+
+.upload-page .tab-btn.active {
+  background: linear-gradient(135deg, #f97316, #eab308);
+  color: #0f172a;
+  box-shadow: 0 4px 18px rgba(249,115,22,0.45);
+  transform: translateY(-2px);
+  font-weight: 800;
+}
+
+/* Thin underline accent on hover (non-active) */
+.upload-page .tab-btn:not(.active)::after {
+  content: '';
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  transform: translateX(-50%) scaleX(0);
+  width: 60%;
+  height: 2px;
+  background: #f97316;
+  border-radius: 2px;
+  transition: transform 0.22s;
+}
+
+.upload-page .tab-btn:not(.active):hover::after {
+  transform: translateX(-50%) scaleX(1);
+}
+
+/* ── Tab content ── */
+.upload-page .tab-content {
+  min-height: 65vh;
+  animation: tabFadeIn 0.3s ease;
+}
+
+@keyframes tabFadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0);   }
+}
+
+/* ── Loading state ── */
+.upload-page .loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 5rem 2rem;
+  color: #94a3b8;
+  gap: 1.5rem;
+}
+
+.upload-page .loading-state span {
+  font-size: 1rem;
+  letter-spacing: 0.08em;
+  animation: uploadPulse 1.5s ease-in-out infinite;
+}
+
+.upload-page .spinner {
+  width: 3rem;
+  height: 3rem;
+  border: 3px solid rgba(249,115,22,0.15);
+  border-top-color: #f97316;
+  border-radius: 50%;
+  animation: uploadSpin 0.75s linear infinite;
+}
+
+/* ── Animations ── */
+@keyframes uploadPulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.65; }
+}
+
+@keyframes uploadSpin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Custom scrollbar ── */
+.upload-page::-webkit-scrollbar       { width: 6px; }
+.upload-page::-webkit-scrollbar-track { background: rgba(15,23,42,0.4); }
+.upload-page::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #f97316, #eab308);
+  border-radius: 4px;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+/* Large tablets */
+@media (max-width: 1024px) {
+  .upload-page .tab-btn { font-size: 0.72rem; padding: 0.65rem 0.95rem; }
+}
+
+/* Tablets */
+@media (max-width: 900px) {
+  .upload-page .upload-header  { margin-bottom: 2rem; }
+  .upload-page .upload-card    { padding: 2.5rem 1.75rem; }
+  .upload-page .meta-grid      { gap: 0.75rem; }
+  .upload-page .meta-card      { padding: 1.25rem 0.75rem; }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .upload-page           { padding: 1.25rem 1rem 2rem; }
+  .upload-page .upload-header { margin-bottom: 1.75rem; }
+  .upload-page .upload-card   { padding: 2rem 1.25rem; border-radius: 1rem; }
+
+  .upload-page .meta-grid { grid-template-columns: 1fr 1fr 1fr; gap: 0.6rem; }
+  .upload-page .meta-card { padding: 1rem 0.5rem; border-radius: 0.75rem; }
+  .upload-page .meta-value { font-size: 1.1rem; }
+  .upload-page .meta-label { font-size: 0.65rem; }
+
+  /* Tab bar stays scrollable — just smaller font/padding */
+  .upload-page .tab-btn { font-size: 0.68rem; padding: 0.6rem 0.8rem; }
+
+  .upload-page .tab-content { min-height: 50vh; }
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+  .upload-page           { padding: 1rem 0.75rem 1.5rem; }
+  .upload-page .upload-card    { padding: 1.5rem 1rem; }
+  .upload-page .upload-icon-box { width: 4rem; height: 4rem; font-size: 1.7rem; }
+  .upload-page .upload-btn  { padding: 0.9rem 2rem; width: 100%; }
+
+  .upload-page .meta-grid  { grid-template-columns: 1fr; gap: 0.5rem; }
+
+  .upload-page .tab-btn { font-size: 0.65rem; padding: 0.55rem 0.7rem; }
+
+  .upload-page .loading-state { padding: 3rem 1rem; }
+}
+
+
+
+/* ── Gateway context banner ── paste at end of Upload.css ── */
+
+.upload-gateway-banner {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  padding: 0.65rem 1.25rem;
+  background: rgba(249, 115, 22, 0.08);
+  border: 1px solid rgba(249, 115, 22, 0.25);
+  border-radius: 0.75rem;
+  margin-bottom: 1.5rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+}
+
+.upload-gateway-banner__item       { color: #e2e8f0; }
+.upload-gateway-banner__item--file { color: #f97316; }
+.upload-gateway-banner__sep        { color: #94a3b8; font-size: 1rem; }
+
+/* ============================================================
+   Upload.css  —  additions for breadcrumb bar + Export All card
+   Append these rules to the existing Upload.css
+   ============================================================ */
+
+/* ── Breadcrumb bar ── */
+.upload-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.2rem;
+  background: rgba(30,41,59,0.75);
+  border: 1px solid rgba(249,115,22,0.15);
+  border-radius: 0.9rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  backdrop-filter: blur(8px);
+}
+.upload-bc-back {
+  background: rgba(249,115,22,0.1);
+  border: 1px solid rgba(249,115,22,0.22);
+  color: #f97316;
+  padding: 0.32rem 0.85rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 20px;
+  transition: background 0.2s, transform 0.15s;
+}
+.upload-bc-back:hover { background: rgba(249,115,22,0.2); transform: translateX(-2px); }
+.upload-bc-sep   { color: #475569; font-size: 20px; }
+.upload-bc-label { color: #e2e8f0; font-size: 20px; font-weight: 600; }
+.upload-bc-spacer { flex: 1; }
+.upload-bc-arrow {
+  color: #475569; font-size: 20px;
+  transition: color 0.2s;
+}
+.upload-bc-arrow--on { color: #f97316; }
+
+.upload-bc-dropdown {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+.upload-bc-dropdown--off { opacity: 0.45; pointer-events: none; }
+.upload-bc-dlabel {
+  font-size: 0.62rem;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}
+.upload-bc-select {
+  background: rgba(15,23,42,0.85);
+  border: 1px solid rgba(148,163,184,0.2);
+  color: #e2e8f0;
+  padding: 0.32rem 0.7rem;
+  border-radius: 0.5rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.76rem;
+  cursor: pointer;
+  transition: border-color 0.2s;
+  max-width: 200px;
+}
+.upload-bc-select:focus { outline: none; border-color: #f97316; }
+.upload-bc-select option { background: #1e293b; }
+.upload-bc-spin {
+  width: 1rem; height: 1rem;
+  border: 2px solid rgba(249,115,22,0.3);
+  border-top-color: #f97316;
+  border-radius: 50%;
+  animation: bcSpin 0.7s linear infinite;
+  display: inline-block;
+}
+@keyframes bcSpin { to { transform: rotate(360deg); } }
+
+.upload-bc-open {
+  background: linear-gradient(135deg, #f97316, #eab308);
+  border: none; color: #fff;
+  padding: 0.42rem 1rem;
+  border-radius: 0.6rem;
+  cursor: pointer;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 20px;
+  font-weight: 700;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 14px rgba(249,115,22,0.3);
+  white-space: nowrap;
+}
+.upload-bc-open:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(249,115,22,0.45); }
+
+/* ── Export All card ── */
+.upload-export-card {
+  background: linear-gradient(135deg, rgba(20,10,0,0.9), rgba(30,41,59,0.9));
+  border: 1px solid rgba(249,115,22,0.25);
+  border-radius: 1.2rem;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  box-shadow: 0 8px 32px rgba(249,115,22,0.1);
+}
+.uec-header {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  flex: 1;
+}
+.uec-icon { font-size: 1.8rem; flex-shrink: 0; }
+.uec-title {
+  font-family: 'Crimson Text', serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #f1f5f9;
+  margin-bottom: 0.2rem;
+}
+.uec-meta { display: flex; align-items: center; gap: 0.4rem; flex-wrap: wrap; }
+.uec-chip {
+  background: rgba(249,115,22,0.12);
+  border: 1px solid rgba(249,115,22,0.25);
+  color: #fb923c;
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+.uec-chip--file {
+  background: rgba(59,130,246,0.1);
+  border-color: rgba(59,130,246,0.25);
+  color: #60a5fa;
+}
+.uec-sep { color: #475569; font-size: 0.8rem; }
+.uec-btns {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+.uec-btn {
+  background: rgba(var(--uec-color-rgb, 249,115,22), 0.12);
+  border: 1px solid color-mix(in srgb, var(--uec-color) 35%, transparent);
+  color: var(--uec-color);
+  padding: 0.45rem 1rem;
+  border-radius: 0.6rem;
+  cursor: pointer;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.76rem;
+  font-weight: 700;
+  transition: transform 0.2s, background 0.2s;
+  white-space: nowrap;
+}
+.uec-btn:hover {
+  background: color-mix(in srgb, var(--uec-color) 20%, transparent);
+  transform: translateY(-2px);
+}
+
+/* ── Panel export row ── */
+.panel-export-row {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 0.75rem;
+}

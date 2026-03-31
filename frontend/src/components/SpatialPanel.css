@@ -1,0 +1,197 @@
+/* SpatialPanel.css — scoped under .sp2-panel */
+
+.sp2-panel {
+  padding: 2rem;
+  background: linear-gradient(135deg, rgba(15,23,42,0.95), rgba(30,41,59,0.9));
+  border-radius: 2rem;
+  border: 1px solid rgba(51,65,85,0.5);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.sp2-snapshot-bar {
+  margin-bottom: 1.5rem;
+  padding: 1.5rem;
+  background: rgba(30,41,59,0.75);
+  border-radius: 1.25rem;
+  border: 1px solid rgba(71,85,105,0.5);
+}
+
+.sp2-snapshot-bar__title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #e2e8f0;
+  margin: 0 0 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sp2-snapshot-scroll {
+  display: flex;
+  gap: 0.6rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+  scrollbar-width: thin;
+}
+
+.sp2-snap-btn {
+  flex-shrink: 0;
+  min-width: 7rem;
+  padding: 0.75rem 0.9rem;
+  border-radius: 0.875rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  border: 1px solid;
+  transition: all 0.25s ease;
+  text-align: center;
+}
+
+.sp2-snap-btn--off {
+  background: rgba(71,85,105,0.7);
+  border-color: rgba(100,116,139,0.5);
+  color: #cbd5e1;
+}
+
+.sp2-snap-btn--off:hover {
+  border-color: rgba(249,115,22,0.5);
+  color: #fb923c;
+  transform: scale(1.04);
+}
+
+.sp2-snap-btn--on {
+  background: linear-gradient(135deg, #f97316, #eab308);
+  border-color: #f97316;
+  color: #0f172a;
+  box-shadow: 0 4px 14px rgba(249,115,22,0.35);
+  transform: scale(1.04);
+}
+
+/* Chart + insights row */
+.sp2-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+@media (max-width: 900px) {
+  .sp2-grid { grid-template-columns: 1fr; }
+}
+
+.sp2-chart-box {
+  background: rgba(15,23,42,0.9);
+  padding: 1.75rem;
+  border-radius: 1.25rem;
+  border: 1px solid rgba(51,65,85,0.5);
+}
+
+.sp2-chart-box__title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #e2e8f0;
+  text-align: center;
+  margin: 0 0 1.25rem;
+}
+
+.sp2-chart-inner {
+  height: 20rem;
+}
+
+/* Insight cards */
+.sp2-insights {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.sp2-insight {
+  padding: 1.25rem;
+  border-radius: 1rem;
+  border: 1px solid;
+}
+
+.sp2-insight--hot {
+  background: rgba(120,53,15,0.5);
+  border-color: rgba(249,115,22,0.4);
+}
+
+.sp2-insight--grad {
+  background: rgba(30,58,138,0.5);
+  border-color: rgba(59,130,246,0.4);
+}
+
+.sp2-insight__label {
+  font-size: 0.9rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.sp2-insight--hot .sp2-insight__label  { color: #fdba74; }
+.sp2-insight--grad .sp2-insight__label { color: #93c5fd; }
+
+.sp2-insight__value {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 0.25rem;
+}
+
+.sp2-insight__sub {
+  font-size: 0.75rem;
+  opacity: 0.7;
+  color: #e2e8f0;
+}
+
+.sp2-insight__rows {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-size: 0.82rem;
+  color: #bfdbfe;
+}
+
+.sp2-insight__rows span { font-weight: 700; color: #93c5fd; }
+
+/* Patterns section */
+.sp2-patterns {
+  padding: 1.5rem;
+  background: rgba(6,78,59,0.4);
+  border-radius: 1.25rem;
+  border: 1px solid rgba(16,185,129,0.35);
+}
+
+.sp2-patterns__title {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #6ee7b7;
+  text-align: center;
+  margin: 0 0 1.25rem;
+}
+
+.sp2-patterns__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1rem;
+  text-align: center;
+}
+
+.sp2-pattern-item {
+  padding: 1.1rem;
+  border-radius: 0.875rem;
+  border: 1px solid;
+}
+
+.sp2-pattern-item--green  { background: rgba(16,185,129,0.15); border-color: rgba(16,185,129,0.3); }
+.sp2-pattern-item--orange { background: rgba(249,115,22,0.15);  border-color: rgba(249,115,22,0.3); }
+.sp2-pattern-item--blue   { background: rgba(59,130,246,0.15);  border-color: rgba(59,130,246,0.3); }
+
+.sp2-pattern-item__icon  { font-size: 1.75rem; margin-bottom: 0.4rem; }
+.sp2-pattern-item__name  { font-size: 0.82rem; font-weight: 700; margin-bottom: 0.25rem; }
+.sp2-pattern-item__desc  { font-size: 0.72rem; opacity: 0.75; color: #e2e8f0; }
+
+.sp2-pattern-item--green  .sp2-pattern-item__name  { color: #34d399; }
+.sp2-pattern-item--orange .sp2-pattern-item__name  { color: #fb923c; }
+.sp2-pattern-item--blue   .sp2-pattern-item__name  { color: #60a5fa; }

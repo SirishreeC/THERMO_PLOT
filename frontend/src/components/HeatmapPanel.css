@@ -1,0 +1,199 @@
+/* HeatmapPanel.css — scoped under .hm-panel */
+
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&display=swap');
+
+.hm-panel {
+  padding: 2.5rem;
+  background: linear-gradient(135deg, rgba(15,23,42,0.95), rgba(30,41,59,0.9));
+  border-radius: 2.5rem;
+  border: 1px solid rgba(148,163,184,0.15);
+  box-shadow: 0 30px 70px rgba(0,0,0,0.4);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Legend */
+.hm-legend {
+  margin-bottom: 2rem;
+  padding: 1.75rem 2rem;
+  background: rgba(31,41,55,0.9);
+  border-radius: 1.5rem;
+  border: 1px solid rgba(148,163,184,0.2);
+}
+
+.hm-legend__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.hm-legend__cold {
+  font-weight: 700;
+  color: #60a5fa;
+  font-size: 0.95rem;
+}
+
+.hm-legend__hot {
+  font-weight: 700;
+  color: #fb923c;
+  font-size: 0.95rem;
+}
+
+.hm-legend__bar {
+  width: 100%;
+  height: 1.1rem;
+  background: linear-gradient(90deg, #1e40af, #3b82f6, #06b6d4, #eab308, #f97316, #dc2626);
+  border-radius: 9999px;
+  margin-bottom: 0.5rem;
+}
+
+.hm-legend__ticks {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: #94a3b8;
+}
+
+/* Scroll container */
+.hm-scroll {
+  max-height: 70vh;
+  overflow: auto;
+  border-radius: 1.25rem;
+  border: 2px solid rgba(255,255,255,0.08);
+  background: rgba(15,23,42,0.85);
+  padding: 1rem;
+  margin-bottom: 1.25rem;
+  scrollbar-width: thin;
+  scrollbar-color: #f97316 rgba(15,23,42,0.5);
+}
+
+.hm-scroll::-webkit-scrollbar       { width: 8px; height: 8px; }
+.hm-scroll::-webkit-scrollbar-track { background: rgba(15,23,42,0.5); border-radius: 4px; }
+.hm-scroll::-webkit-scrollbar-thumb { background: linear-gradient(135deg,#f97316,#eab308); border-radius: 4px; }
+
+/* Grid wrapper */
+.hm-grid {
+  display: grid;
+  gap: 0.25rem;
+  min-width: max-content;
+}
+
+/* Header cells */
+.hm-grid__time-header {
+  padding: 0.75rem 1rem;
+  background: rgba(71,85,105,0.95);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.8rem;
+  border-radius: 0.75rem 0 0 0;
+  position: sticky;
+  left: 0;
+  top: 0;
+  z-index: 25;
+  border-bottom: 2px solid rgba(249,115,22,0.5);
+  white-space: nowrap;
+}
+
+.hm-grid__col-header {
+  padding: 0.75rem 0.5rem;
+  background: rgba(71,85,105,0.95);
+  color: #e2e8f0;
+  font-weight: 700;
+  font-size: 0.75rem;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  border-bottom: 2px solid rgba(249,115,22,0.5);
+  white-space: nowrap;
+  transition: background 0.2s;
+}
+
+.hm-grid__col-header:hover {
+  background: rgba(249,115,22,0.25);
+}
+
+/* Time column data cells */
+.hm-grid__time-cell {
+  padding: 0.6rem 0.9rem;
+  background: rgba(71,85,105,0.9);
+  color: #e2e8f0;
+  font-weight: 700;
+  font-size: 0.8rem;
+  position: sticky;
+  left: 0;
+  z-index: 10;
+  border-right: 3px solid rgba(249,115,22,0.6);
+  border-radius: 0.5rem 0 0 0.5rem;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+}
+
+/* Heatmap data cells */
+.hm-grid__cell {
+  position: relative;
+  padding: 0.5rem 0.4rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 0.5rem;
+  border: 2px solid transparent;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 3.5rem;
+  min-height: 2.6rem;
+}
+
+.hm-grid__cell:hover {
+  transform: scale(1.12);
+  z-index: 30;
+  border-color: rgba(255,255,255,0.5);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+}
+
+/* Tooltip */
+.hm-tooltip {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(15,23,42,0.97);
+  color: #fff;
+  padding: 0.6rem 0.9rem;
+  border-radius: 0.75rem;
+  font-size: 0.8rem;
+  white-space: nowrap;
+  z-index: 50;
+  pointer-events: none;
+  border: 1px solid rgba(255,255,255,0.2);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.hm-tooltip__sub {
+  font-size: 0.7rem;
+  color: #94a3b8;
+  margin-top: 0.2rem;
+}
+
+/* Notice bar */
+.hm-notice {
+  margin-top: 1rem;
+  padding: 1rem 1.5rem;
+  background: rgba(254,243,199,0.15);
+  border: 2px solid rgba(251,146,60,0.5);
+  border-radius: 1rem;
+  text-align: center;
+  color: #fef3c7;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+@media (max-width: 768px) {
+  .hm-panel { padding: 1.25rem; }
+}

@@ -1,0 +1,217 @@
+/* ============================================================
+   data_visual.css  —  Thermal Analysis page
+   Dark industrial thermal research theme
+   ============================================================ */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+
+.dv-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0f172a 0%, #1a0033 50%, #0f172a 100%);
+  padding: 2rem 2.5rem 3rem;
+  color: #e2e8f0;
+  font-family: 'JetBrains Mono', monospace;
+  box-sizing: border-box;
+}
+
+/* ── Loading ── */
+.dv-loading {
+  display: flex; align-items: center; gap: 0.75rem;
+  justify-content: center; padding: 4rem 0;
+  color: #94a3b8; font-size: 0.88rem;
+}
+.dv-loading--inner { padding: 1.5rem 2rem; justify-content: flex-start; }
+.dv-spinner {
+  width: 1.1rem; height: 1.1rem;
+  border: 2px solid rgba(249,115,22,0.3);
+  border-top-color: #f97316;
+  border-radius: 50%;
+  animation: dvSpin 0.7s linear infinite;
+  display: inline-block; flex-shrink: 0;
+}
+@keyframes dvSpin { to { transform: rotate(360deg); } }
+
+/* ── Header ── */
+.dv-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+.dv-title {
+  font-family: 'Crimson Text', serif;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 700;
+  background: linear-gradient(135deg, #f97316, #eab308);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0 0 0.3rem;
+}
+.dv-sub { font-size: 0.82rem; color: #64748b; margin: 0; }
+
+.dv-tv-badge {
+  background: linear-gradient(160deg, #1a0a00, #1e293b);
+  border: 1px solid rgba(249,115,22,0.25);
+  border-radius: 1rem;
+  padding: 0.85rem 1.5rem;
+  text-align: right;
+  box-shadow: 0 0 24px rgba(249,115,22,0.08);
+  position: relative;
+  overflow: hidden;
+}
+.dv-tv-badge::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, #f97316, #eab308, transparent);
+}
+.dv-tv-label {
+  display: block;
+  font-family: 'Crimson Text', serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #f97316, #eab308);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: dvPulse 2.5s ease-in-out infinite;
+}
+@keyframes dvPulse {
+  0%,100% { filter: drop-shadow(0 0 6px rgba(249,115,22,0.4)); }
+  50%      { filter: drop-shadow(0 0 16px rgba(249,115,22,0.7)); }
+}
+.dv-tv-sub { font-size: 0.68rem; color: #64748b; letter-spacing: 0.07em; text-transform: uppercase; }
+
+/* ── Empty ── */
+.dv-empty {
+  display: flex; flex-direction: column; align-items: center;
+  gap: 0.85rem; padding: 5rem 1rem; color: #64748b; text-align: center;
+}
+.dv-empty-icon { font-size: 3.5rem; }
+.dv-empty p { font-size: 0.88rem; }
+.dv-goto-btn {
+  background: linear-gradient(135deg, #f97316, #eab308);
+  border: none; color: #fff;
+  padding: 0.6rem 1.4rem; border-radius: 0.6rem;
+  cursor: pointer; font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem; font-weight: 700;
+  transition: transform 0.2s; box-shadow: 0 4px 14px rgba(249,115,22,0.3);
+}
+.dv-goto-btn:hover { transform: translateY(-2px); }
+
+/* ── Folder list ── */
+.dv-folder-list { display: flex; flex-direction: column; gap: 0.85rem; }
+
+.dv-folder {
+  background: rgba(15,23,42,0.6);
+  border: 1px solid rgba(249,115,22,0.1);
+  border-radius: 1rem;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+.dv-folder--open { border-color: rgba(249,115,22,0.28); }
+
+/* Folder header row */
+.dv-folder-header {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 1rem 1.25rem;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.2s;
+  flex-wrap: wrap;
+}
+.dv-folder-header:hover { background: rgba(249,115,22,0.06); }
+
+.dv-folder-chevron { color: #f97316; font-size: 0.85rem; width: 1rem; flex-shrink: 0; }
+.dv-folder-icon    { font-size: 1.4rem; flex-shrink: 0; }
+.dv-folder-name    {
+  font-size: 0.95rem; font-weight: 700; color: #f1f5f9;
+  font-family: 'Crimson Text', serif; font-size: 1.05rem;
+}
+.dv-status-badge {
+  padding: 0.18rem 0.6rem; border-radius: 999px;
+  font-size: 0.67rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.05em;
+  flex-shrink: 0;
+}
+.dv-folder-desc { font-size: 0.75rem; color: #64748b; }
+.dv-folder-spacer { flex: 1; }
+.dv-folder-date { font-size: 0.72rem; color: #475569; }
+
+/* Folder body */
+.dv-folder-body {
+  border-top: 1px solid rgba(249,115,22,0.1);
+  padding: 1.25rem;
+  background: rgba(10,16,30,0.4);
+}
+.dv-folder-empty {
+  display: flex; align-items: center; gap: 1rem;
+  color: #64748b; font-size: 0.82rem;
+}
+.dv-upload-btn {
+  background: rgba(249,115,22,0.12);
+  border: 1px solid rgba(249,115,22,0.25);
+  color: #fb923c; padding: 0.3rem 0.8rem;
+  border-radius: 0.5rem; cursor: pointer;
+  font-family: 'JetBrains Mono', monospace; font-size: 0.72rem;
+  transition: background 0.2s;
+}
+.dv-upload-btn:hover { background: rgba(249,115,22,0.2); }
+
+/* File grid */
+.dv-file-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+}
+.dv-file-card {
+  background: linear-gradient(135deg, rgba(30,41,59,0.9), rgba(20,30,50,0.85));
+  border: 1px solid rgba(249,115,22,0.1);
+  border-radius: 0.9rem;
+  padding: 1.1rem;
+  display: flex; flex-direction: column; gap: 0.45rem;
+  transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+.dv-file-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(249,115,22,0.3);
+  box-shadow: 0 10px 28px rgba(249,115,22,0.12);
+}
+.dv-file-card-top {
+  display: flex; justify-content: space-between; align-items: center;
+}
+.dv-file-icon { font-size: 1.5rem; }
+.dv-file-status {
+  font-size: 0.65rem; font-weight: 700;
+  background: rgba(16,185,129,0.12);
+  color: #34d399; border: 1px solid rgba(16,185,129,0.25);
+  padding: 0.12rem 0.5rem; border-radius: 999px;
+  text-transform: uppercase; letter-spacing: 0.05em;
+}
+.dv-file-name {
+  font-size: 0.82rem; font-weight: 600; color: #e2e8f0;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.dv-file-meta { font-size: 0.72rem; color: #64748b; }
+.dv-file-date { font-size: 0.7rem; color: #475569; }
+
+.dv-view-btn {
+  background: linear-gradient(135deg, #f97316, #eab308);
+  border: none; color: #fff;
+  padding: 0.5rem 0.85rem;
+  border-radius: 0.6rem;
+  cursor: pointer;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.73rem; font-weight: 700;
+  margin-top: 0.3rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 12px rgba(249,115,22,0.25);
+  text-align: center;
+}
+.dv-view-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(249,115,22,0.42);
+}
